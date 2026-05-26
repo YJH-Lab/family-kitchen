@@ -1,2 +1,33 @@
 <!--pages/user/user.wxml-->
-<view>user</view>
+<view class="container">
+  <!-- 顶部用户信息 -->
+  <view class="user-header">
+    <image class="avatar" src="https://dummyimage.com/150x150/cccccc/ffffff&text=User" mode="aspectFill"></image>
+    <view class="user-info">
+      <text class="user-name">家庭点餐用户</text>
+    </view>
+  </view>
+
+  <!-- 订单状态区 -->
+  <view class="order-status-card">
+    <view class="status-item">
+      <text class="status-text">待付款</text>
+    </view>
+    <view class="status-item">
+      <text class="status-text">进行中</text>
+    </view>
+    <view class="status-item">
+      <text class="status-text">已完成</text>
+    </view>
+  </view>
+
+  <!-- 菜单列表区 -->
+  <view class="menu-list-card">
+    <block wx:for="{{menuList}}" wx:key="title">
+      <view class="menu-item">
+        <text class="menu-title">{{item.title}}</text>
+        <text class="menu-arrow">></text>
+      </view>
+    </block>
+  </view>
+</view>
