@@ -1,1 +1,156 @@
 /* pages/index/index.wxss */
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f6f6f6;
+}
+
+/* 搜索框 */
+.search-container {
+  padding: 20rpx 30rpx;
+  background-color: #ffffff;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  background-color: #f0f0f0;
+  height: 64rpx;
+  border-radius: 32rpx;
+  padding: 0 20rpx;
+}
+
+.search-input {
+  flex: 1;
+  font-size: 26rpx;
+  margin-left: 10rpx;
+  color: #333;
+}
+
+/* 导航栏 */
+.nav-bar {
+  display: flex;
+  background-color: #ffffff;
+  padding: 0 10rpx;
+  height: 80rpx;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.nav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  position: relative;
+  font-size: 28rpx;
+  color: #666;
+}
+
+.nav-item.active {
+  font-weight: bold;
+  color: #333;
+}
+
+.indicator {
+  position: absolute;
+  bottom: 0;
+  width: 40rpx;
+  height: 6rpx;
+  background-color: #82B28B;
+  border-radius: 3rpx;
+}
+
+/* 列表区 */
+.dish-list {
+  padding: 20rpx;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20rpx;
+}
+
+.dish-card {
+  background-color: #ffffff;
+  border-radius: 12rpx;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.dish-image {
+  width: 100%;
+  height: 240rpx;
+  background-color: #e0e0e0;
+}
+
+.dish-info {
+  padding: 16rpx;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.dish-name {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 8rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+}
+
+.dish-desc {
+  font-size: 22rpx;
+  color: #999;
+  margin-bottom: 16rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  flex: 1;
+}
+
+.dish-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+
+.dish-price {
+  font-size: 32rpx;
+  color: #e64340;
+  font-weight: bold;
+}
+
+.add-btn {
+  width: 44rpx;
+  height: 44rpx;
+  border-radius: 50%;
+  background-color: #82B28B;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-icon {
+  color: #ffffff;
+  font-size: 32rpx;
+  font-weight: bold;
+  line-height: 40rpx;
+  margin-top: -4rpx; /* 微调加号垂直居中 */
+}
+
+.empty-tip {
+  grid-column: span 2;
+  text-align: center;
+  padding: 40rpx 0;
+  color: #999;
+  font-size: 28rpx;
+}

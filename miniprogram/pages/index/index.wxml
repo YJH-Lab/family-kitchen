@@ -1,2 +1,43 @@
 <!--pages/index/index.wxml-->
-<view>index</view>
+<view class="container">
+  <!-- 顶部搜索框 -->
+  <view class="search-container">
+    <view class="search-box">
+      <icon type="search" size="14" color="#999"></icon>
+      <input class="search-input" placeholder="搜索菜品..." placeholder-style="color:#999;" />
+    </view>
+  </view>
+
+  <!-- 导航栏 -->
+  <view class="nav-bar">
+    <block wx:for="{{categories}}" wx:key="*this">
+      <view class="nav-item {{currentCategory === item ? 'active' : ''}}" bindtap="switchCategory" data-category="{{item}}">
+        <text>{{item}}</text>
+        <view class="indicator" wx:if="{{currentCategory === item}}"></view>
+      </view>
+    </block>
+  </view>
+
+  <!-- 列表区 -->
+  <view class="dish-list">
+    <block wx:for="{{dishes}}" wx:key="_id">
+      <view class="dish-card" bindtap="goToDetail" data-id="{{item._id}}">
+        <image class="dish-image" src="{{item.image}}" mode="aspectFill"></image>
+        <view class="dish-info">
+          <text class="dish-name">{{item.name}}</text>
+          <text class="dish-desc">{{item.desc}}</text>
+          <view class="dish-bottom">
+            <text class="dish-price">¥{{item.price}}</text>
+            <view class="add-btn" catchtap="addToCart" data-item="{{item}}">
+              <text class="add-icon">+</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+
+    <view class="empty-tip" wx:if="{{dishes.length === 0}}">
+      暂无菜品数据
+    </view>
+  </view>
+</view>
