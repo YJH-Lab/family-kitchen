@@ -1,2 +1,63 @@
 <!--pages/detail/detail.wxml-->
-<view>detail</view>
+<view class="container" wx:if="{{dish}}">
+  <!-- 顶部大图 -->
+  <image class="cover-image" src="{{dish.image}}" mode="aspectFill"></image>
+
+  <!-- 信息区 -->
+  <view class="info-card">
+    <view class="info-header">
+      <view class="name-price">
+        <text class="dish-name">{{dish.name}}</text>
+        <text class="dish-price">¥{{dish.price}}</text>
+      </view>
+
+      <!-- 数量调节器 -->
+      <view class="stepper">
+        <view class="step-btn minus {{count <= 1 ? 'disabled' : ''}}" bindtap="decreaseCount">-</view>
+        <text class="step-count">{{count}}</text>
+        <view class="step-btn plus" bindtap="increaseCount">+</view>
+      </view>
+    </view>
+
+    <text class="dish-desc">{{dish.desc}}</text>
+  </view>
+
+  <!-- 按钮区 -->
+  <view class="action-card">
+    <button class="btn-add-cart" bindtap="addToCart">加入购物车</button>
+    <button class="btn-view-recipe" bindtap="scrollToRecipe">查看做法</button>
+  </view>
+
+  <!-- 做法区 -->
+  <view class="recipe-area" id="recipe-section">
+    <!-- 用料列表 -->
+    <view class="section-title">用料</view>
+    <view class="ingredients-list">
+      <block wx:for="{{dish.ingredients}}" wx:key="name">
+        <view class="ingredient-item">
+          <text class="ing-name">{{item.name}}</text>
+          <text class="ing-weight">{{item.weight}}</text>
+        </view>
+      </block>
+    </view>
+
+    <!-- 步骤时间轴 -->
+    <view class="section-title">步骤</view>
+    <view class="steps-timeline">
+      <block wx:for="{{dish.steps}}" wx:key="step">
+        <view class="timeline-item">
+          <view class="timeline-left">
+            <view class="timeline-circle">{{item.step}}</view>
+            <view class="timeline-line" wx:if="{{index < dish.steps.length - 1}}"></view>
+          </view>
+          <view class="timeline-right">
+            <text class="step-text">{{item.text}}</text>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>
+<view class="loading-container" wx:else>
+  <text>加载中...</text>
+</view>

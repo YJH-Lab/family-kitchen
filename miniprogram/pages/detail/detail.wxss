@@ -1,1 +1,230 @@
 /* pages/detail/detail.wxss */
+.container {
+  min-height: 100vh;
+  background-color: #f6f6f6;
+  padding-bottom: 40rpx;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: #999;
+}
+
+/* 顶部大图 */
+.cover-image {
+  width: 100%;
+  height: 400rpx;
+  background-color: #e0e0e0;
+  display: block;
+}
+
+/* 信息区 */
+.info-card {
+  background-color: #ffffff;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+}
+
+.info-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.name-price {
+  display: flex;
+  flex-direction: column;
+}
+
+.dish-name {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10rpx;
+}
+
+.dish-price {
+  font-size: 36rpx;
+  color: #e64340;
+  font-weight: bold;
+}
+
+.dish-desc {
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.5;
+}
+
+/* 数量调节器 */
+.stepper {
+  display: flex;
+  align-items: center;
+}
+
+.step-btn {
+  width: 50rpx;
+  height: 50rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32rpx;
+  font-weight: bold;
+  border-radius: 8rpx;
+}
+
+.step-btn.minus {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.step-btn.minus.disabled {
+  color: #ccc;
+}
+
+.step-btn.plus {
+  background-color: #82B28B;
+  color: #fff;
+}
+
+.step-count {
+  min-width: 60rpx;
+  text-align: center;
+  font-size: 30rpx;
+  color: #333;
+}
+
+/* 按钮区 */
+.action-card {
+  background-color: #ffffff;
+  padding: 30rpx;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20rpx;
+}
+
+.btn-add-cart, .btn-view-recipe {
+  flex: 1;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 30rpx;
+  border-radius: 40rpx;
+  margin: 0 10rpx;
+}
+
+.btn-add-cart {
+  background-color: #82B28B !important;
+  color: #ffffff !important;
+}
+
+.btn-view-recipe {
+  background-color: #ffffff !important;
+  color: #82B28B !important;
+  border: 2rpx solid #82B28B !important;
+}
+
+/* 做法区 */
+.recipe-area {
+  background-color: #ffffff;
+  padding: 30rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 30rpx;
+  position: relative;
+  padding-left: 20rpx;
+}
+
+.section-title::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8rpx;
+  height: 32rpx;
+  background-color: #82B28B;
+  border-radius: 4rpx;
+}
+
+/* 用料列表 */
+.ingredients-list {
+  margin-bottom: 50rpx;
+}
+
+.ingredient-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 24rpx 0;
+  border-bottom: 2rpx solid #f0f0f0;
+  font-size: 28rpx;
+  color: #333;
+}
+
+.ingredient-item:last-child {
+  border-bottom: none;
+}
+
+/* 步骤时间轴 */
+.steps-timeline {
+  display: flex;
+  flex-direction: column;
+}
+
+.timeline-item {
+  display: flex;
+  position: relative;
+  margin-bottom: 40rpx;
+}
+
+.timeline-item:last-child {
+  margin-bottom: 0;
+}
+
+.timeline-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 60rpx;
+  margin-right: 20rpx;
+}
+
+.timeline-circle {
+  width: 44rpx;
+  height: 44rpx;
+  background-color: #82B28B;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24rpx;
+  font-weight: bold;
+  z-index: 2;
+}
+
+.timeline-line {
+  position: absolute;
+  top: 44rpx;
+  bottom: -40rpx; /* 延伸到下一个圆圈 */
+  width: 2rpx;
+  background-color: #82B28B;
+  z-index: 1;
+}
+
+.timeline-right {
+  flex: 1;
+  padding-top: 4rpx; /* 与圆圈垂直对齐 */
+}
+
+.step-text {
+  font-size: 28rpx;
+  color: #333;
+  line-height: 1.6;
+}
