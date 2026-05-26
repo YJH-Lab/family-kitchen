@@ -1,2 +1,41 @@
 <!--pages/order/order.wxml-->
-<view>order</view>
+<view class="container">
+  <!-- 购物车列表 -->
+  <scroll-view class="cart-list" scroll-y="true" wx:if="{{cartList.length > 0}}">
+    <block wx:for="{{cartList}}" wx:key="_id">
+      <view class="cart-item">
+        <image class="item-image" src="{{item.image}}" mode="aspectFill"></image>
+
+        <view class="item-info">
+          <view class="item-header">
+            <text class="item-name">{{item.name}}</text>
+            <text class="item-delete" bindtap="deleteItem" data-id="{{item._id}}">删除</text>
+          </view>
+
+          <view class="item-bottom">
+            <text class="item-price">¥{{item.price}}</text>
+            <text class="item-quantity">x{{item.quantity}}</text>
+          </view>
+        </view>
+      </view>
+    </block>
+    <!-- 底部留白防止被结算栏遮挡 -->
+    <view class="bottom-padding"></view>
+  </scroll-view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:else>
+    <image class="empty-image" src="https://dummyimage.com/200x200/cccccc/fff&text=Empty" mode="aspectFit"></image>
+    <text class="empty-text">您的菜单空空如也</text>
+    <button class="btn-go-menu" bindtap="goToIndex">去点餐</button>
+  </view>
+
+  <!-- 底部结算栏 -->
+  <view class="checkout-bar" wx:if="{{cartList.length > 0}}">
+    <view class="total-info">
+      <text class="total-label">合计：</text>
+      <text class="total-price">¥{{totalPrice}}</text>
+    </view>
+    <button class="btn-checkout" bindtap="checkout">去结算</button>
+  </view>
+</view>
