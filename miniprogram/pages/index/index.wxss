@@ -1,16 +1,1 @@
-/**index.wxss**/
-page {
-  background-color: #f6f6f6;
-}
-
-.container {
-  font-family: PingFang SC;
-  padding: 40rpx;
-}
-
-.placeholder {
-  text-align: center;
-  color: #999;
-  font-size: 32rpx;
-  margin-top: 200rpx;
-}
+/* pages/index/index.wxss */

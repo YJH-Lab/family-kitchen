@@ -1,15 +1,40 @@
 {
   "pages": [
-    "pages/index/index"
+    "pages/index/index",
+    "pages/detail/detail",
+    "pages/order/order",
+    "pages/user/user"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#F6F6F6",
     "navigationBarTitleText": "家庭点餐",
+    "navigationBarBackgroundColor": "#FFFFFF",
     "navigationBarTextStyle": "black"
   },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#82B28B",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "",
+        "selectedIconPath": ""
+      },
+      {
+        "pagePath": "pages/order/order",
+        "text": "订单",
+        "iconPath": "",
+        "selectedIconPath": ""
+      },
+      {
+        "pagePath": "pages/user/user",
+        "text": "我",
+        "iconPath": "",
+        "selectedIconPath": ""
+      }
+    ]
+  },
   "sitemapLocation": "sitemap.json",
-  "style": "v2",
-  "lazyCodeLoading": "requiredComponents"
+  "style": "v2"
 }

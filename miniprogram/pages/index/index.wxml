@@ -1,4 +1,2 @@
 <!--pages/index/index.wxml-->
-<view class="container">
-  <view class="placeholder">家庭点餐 - 开发中</view>
-</view>
+<view>index</view>
