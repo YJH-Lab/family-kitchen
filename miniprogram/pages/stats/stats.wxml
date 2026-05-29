@@ -1,0 +1,64 @@
+<!--pages/stats/stats.wxml-->
+<view class="container">
+  <view class="summary-card">
+    <view class="summary-top">
+      <view>
+        <text class="summary-label">{{periodTitle}}</text>
+        <view class="summary-amount">
+          <text class="currency">¥</text>
+          <text>{{totalAmount}}</text>
+        </view>
+      </view>
+      <image class="summary-icon" src="/images/ui-stats.png" mode="aspectFit"></image>
+    </view>
+
+    <view class="mode-tabs">
+      <view class="mode-item {{weekTabClass}}" bindtap="switchMode" data-mode="week">周</view>
+      <view class="mode-item {{monthTabClass}}" bindtap="switchMode" data-mode="month">月</view>
+      <view class="mode-item {{yearTabClass}}" bindtap="switchMode" data-mode="year">年</view>
+    </view>
+  </view>
+
+  <view class="metric-row">
+    <view class="metric-card">
+      <text class="metric-value">{{orderCount}}</text>
+      <text class="metric-label">点餐次数</text>
+    </view>
+    <view class="metric-card">
+      <text class="metric-value">¥{{averageAmount}}</text>
+      <text class="metric-label">平均每次</text>
+    </view>
+  </view>
+
+  <view class="section-card" wx:if="{{hasTrend}}">
+    <view class="section-title">花费趋势</view>
+    <block wx:for="{{trendItems}}" wx:key="label">
+      <view class="trend-item">
+        <text class="trend-label">{{item.label}}</text>
+        <view class="trend-track">
+          <view class="trend-bar" style="{{item.barStyle}}"></view>
+        </view>
+        <text class="trend-amount">¥{{item.amount}}</text>
+      </view>
+    </block>
+  </view>
+
+  <view class="section-card" wx:if="{{hasRecent}}">
+    <view class="section-title">点餐记录</view>
+    <block wx:for="{{recentOrders}}" wx:key="_id">
+      <view class="order-item">
+        <view class="order-main">
+          <text class="order-date">{{item.dateText}}</text>
+          <text class="order-desc">{{item.itemNames}}</text>
+        </view>
+        <text class="order-amount">¥{{item.totalText}}</text>
+      </view>
+    </block>
+  </view>
+
+  <view class="empty-state" wx:if="{{isEmpty}}">
+    <image class="empty-icon" src="/images/ui-empty-order.png" mode="aspectFit"></image>
+    <text class="empty-title">还没有点餐记录</text>
+    <text class="empty-desc">结算一次订单后，这里会自动统计花费</text>
+  </view>
+</view>

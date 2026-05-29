@@ -1,0 +1,9 @@
+{
+  "name": "upload-menu-images",
+  "version": "1.0.0",
+  "description": "匹配云存储菜单图片到数据库",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

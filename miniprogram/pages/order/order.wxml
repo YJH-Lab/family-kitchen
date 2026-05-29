@@ -4,7 +4,7 @@
   <scroll-view class="cart-list" scroll-y="true" wx:if="{{cartList.length > 0}}">
     <block wx:for="{{cartList}}" wx:key="_id">
       <view class="cart-item">
-        <image class="item-image" src="{{item.image}}" mode="aspectFill"></image>
+        <image class="item-image" src="{{item.displayImage}}" mode="aspectFill"></image>
 
         <view class="item-info">
           <view class="item-header">
@@ -25,7 +25,7 @@
 
   <!-- 空状态 -->
   <view class="empty-state" wx:else>
-    <image class="empty-image" src="https://dummyimage.com/200x200/cccccc/fff&text=Empty" mode="aspectFit"></image>
+    <image class="empty-image" src="/images/ui-empty-order.png" mode="aspectFit"></image>
     <text class="empty-text">您的菜单空空如也</text>
     <button class="btn-go-menu" bindtap="goToIndex">去点餐</button>
   </view>

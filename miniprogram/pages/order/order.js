@@ -1,4 +1,6 @@
 // pages/order/order.js
+import { attachDisplayImages } from '../../utils/cloud-image.js';
+
 Page({
   data: {
     cartList: [],
@@ -18,11 +20,11 @@ Page({
 
     // 监听 cart 集合
     this.watcher = db.collection('cart').watch({
-      onChange: snapshot => {
+      onChange: async snapshot => {
         wx.hideLoading();
         console.log('收到实时数据更新', snapshot.docs);
 
-        const list = snapshot.docs;
+        const list = await attachDisplayImages(snapshot.docs);
 
         // 计算总价
         let total = 0;
@@ -65,13 +67,56 @@ Page({
     });
   },
 
-  checkout: function () {
+  checkout: async function () {
     if (this.data.cartList.length === 0) return;
 
-    wx.showToast({
-      title: '结算功能开发中',
-      icon: 'none'
+    const db = wx.cloud.database();
+    const cartCollection = db.collection('cart');
+    const now = new Date();
+    const items = this.data.cartList.map(item => ({
+      dishId: item.dishId || item._id,
+      name: item.name,
+      price: Number(item.price) || 0,
+      quantity: Number(item.quantity) || 1,
+      image: item.image,
+      displayImage: item.displayImage
+    }));
+
+    wx.showLoading({
+      title: '结算中...',
+      mask: true
     });
+
+    try {
+      await db.collection('orders').add({
+        data: {
+          orderNo: `FK${now.getTime()}`,
+          items,
+          totalPrice: this.data.totalPrice,
+          itemCount: items.reduce((sum, item) => sum + item.quantity, 0),
+          status: 'completed',
+          createdAt: db.serverDate(),
+          createdAtLocal: now.getTime()
+        }
+      });
+
+      await Promise.all(
+        this.data.cartList.map(item => cartCollection.doc(item._id).remove())
+      );
+
+      wx.hideLoading();
+      wx.showToast({
+        title: '已记录本次点餐',
+        icon: 'success'
+      });
+    } catch (err) {
+      wx.hideLoading();
+      console.error('结算失败：', err);
+      wx.showToast({
+        title: '结算失败，请重试',
+        icon: 'none'
+      });
+    }
   },
 
   goToIndex: function() {

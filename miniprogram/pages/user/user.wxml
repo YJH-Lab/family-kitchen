@@ -2,31 +2,38 @@
 <view class="container">
   <!-- 顶部用户信息 -->
   <view class="user-header">
-    <image class="avatar" src="https://dummyimage.com/150x150/cccccc/ffffff&text=User" mode="aspectFill"></image>
+    <image class="avatar" src="/images/ui-avatar.png" mode="aspectFill"></image>
     <view class="user-info">
-      <text class="user-name">家庭点餐用户</text>
+      <text class="user-name">点餐爱好者</text>
     </view>
   </view>
 
   <!-- 订单状态区 -->
   <view class="order-status-card">
-    <view class="status-item">
-      <text class="status-text">待付款</text>
+    <view class="card-title-row">
+      <view class="title-left">
+        <image class="title-icon" src="/images/ui-order.png" mode="aspectFit"></image>
+        <text class="card-title">我的订单</text>
+      </view>
+      <text class="menu-arrow">›</text>
     </view>
-    <view class="status-item">
-      <text class="status-text">进行中</text>
-    </view>
-    <view class="status-item">
-      <text class="status-text">已完成</text>
+    <view class="status-row">
+      <block wx:for="{{orderStatusList}}" wx:key="title">
+        <view class="status-item">
+          <image class="status-icon" src="{{item.icon}}" mode="aspectFit"></image>
+          <text class="status-text">{{item.title}}</text>
+        </view>
+      </block>
     </view>
   </view>
 
   <!-- 菜单列表区 -->
   <view class="menu-list-card">
     <block wx:for="{{menuList}}" wx:key="title">
-      <view class="menu-item">
+      <view class="menu-item {{item.groupStart ? 'group-start' : ''}} {{item.groupEnd ? 'group-end' : ''}}" bindtap="openMenu" data-url="{{item.url}}">
+        <image class="menu-icon" src="{{item.icon}}" mode="aspectFit"></image>
         <text class="menu-title">{{item.title}}</text>
-        <text class="menu-arrow">></text>
+        <text class="menu-arrow">›</text>
       </view>
     </block>
   </view>

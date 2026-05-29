@@ -1,5 +1,3 @@
-import { initDatabase } from './db-init.js';
-
 App({
   onLaunch: function () {
     if (!wx.cloud) {
@@ -9,9 +7,6 @@ App({
         env: 'cloud1-d7gcfpwmc6468882a',
         traceUser: true,
       });
-
-      // 执行数据库“超级初始化脚本”
-      initDatabase();
     }
   },
 

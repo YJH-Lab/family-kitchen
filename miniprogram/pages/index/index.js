@@ -1,63 +1,76 @@
 // pages/index/index.js
+import { attachDisplayImages } from '../../utils/cloud-image.js';
+
 Page({
   data: {
     categories: ['特色', '冷菜', '热菜', '汤'],
     currentCategory: '特色',
     dishes: [],
-    allDishes: []
+    allDishes: [],
+    searchText: ''
   },
 
   onLoad: function (options) {
     this.fetchDishes();
   },
 
-  fetchDishes: function () {
-    wx.showLoading({
-      title: '加载中...',
-    });
+  fetchDishes: async function (category = this.data.currentCategory) {
+    wx.showLoading({ title: '加载中...' });
 
     const db = wx.cloud.database();
-    db.collection('dishes').get({
-      success: res => {
-        wx.hideLoading();
-        this.setData({
-          allDishes: res.data,
-          dishes: res.data // 默认显示所有，或者根据需要可以过滤
-        });
+    const collection = db.collection('dishes');
+    const pageSize = 20;
+    let allData = [];
+    let skip = 0;
 
-        // 如果想初始只显示 '特色'，可以取消下面注释：
-        // this.filterDishes('特色');
-      },
-      fail: err => {
-        wx.hideLoading();
-        console.error('获取菜品列表失败：', err);
-        wx.showToast({
-          title: '获取数据失败',
-          icon: 'none'
-        });
+    try {
+      while (true) {
+        const res = await collection
+          .where({ category })
+          .skip(skip)
+          .limit(pageSize)
+          .get();
+        allData = allData.concat(res.data);
+        if (res.data.length < pageSize) break;
+        skip += pageSize;
       }
-    });
+
+      const dishes = await attachDisplayImages(allData);
+      wx.hideLoading();
+      this.setData({
+        allDishes: dishes,
+        dishes
+      });
+    } catch (err) {
+      wx.hideLoading();
+      console.error('获取菜品列表失败：', err);
+      wx.showToast({ title: '获取数据失败', icon: 'none' });
+    }
   },
 
   switchCategory: function (e) {
     const category = e.currentTarget.dataset.category;
     this.setData({
-      currentCategory: category
+      currentCategory: category,
+      searchText: ''
     });
-
-    // 简单的本地过滤逻辑
-    this.filterDishes(category);
+    this.fetchDishes(category);
   },
 
-  filterDishes: function(category) {
-    // 假设如果分类是'特色'显示全部，其他按照 category 字段过滤
-    // 根据实际业务逻辑调整
-    if (category === '特色') {
+  onSearchInput: function (e) {
+    this.setData({ searchText: e.detail.value });
+  },
+
+  onSearch: function () {
+    const keyword = this.data.searchText.trim();
+    if (!keyword) {
       this.setData({ dishes: this.data.allDishes });
-    } else {
-      const filtered = this.data.allDishes.filter(item => item.category === category);
-      this.setData({ dishes: filtered });
+      return;
     }
+    const results = this.data.allDishes.filter(item =>
+      item.name.includes(keyword) || item.desc.includes(keyword)
+    );
+    this.setData({ dishes: results });
   },
 
   goToDetail: function (e) {
@@ -84,6 +97,7 @@ Page({
         name: dish.name,
         price: dish.price,
         image: dish.image,
+        displayImage: dish.displayImage,
         quantity: 1,
         addTime: db.serverDate()
       },

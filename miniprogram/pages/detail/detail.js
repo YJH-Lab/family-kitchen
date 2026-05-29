@@ -1,4 +1,25 @@
 // pages/detail/detail.js
+import { attachDisplayImage } from '../../utils/cloud-image.js';
+
+const ingredientIconMap = [
+  { keywords: ['鸡', '鸭', '肉', '排骨', '牛', '羊', '鱼', '虾'], icon: '/images/ing-chicken.png' },
+  { keywords: ['花生'], icon: '/images/ing-peanut.png' },
+  { keywords: ['辣椒', '椒'], icon: '/images/ing-pepper.png' },
+  { keywords: ['花椒', '胡椒'], icon: '/images/ing-spice.png' },
+  { keywords: ['盐', '糖', '淀粉', '面粉'], icon: '/images/ing-salt.png' },
+  { keywords: ['葱', '韭菜', '香菜'], icon: '/images/ing-scallion.png' },
+  { keywords: ['姜'], icon: '/images/ing-ginger.png' },
+  { keywords: ['蒜'], icon: '/images/ing-garlic.png' },
+  { keywords: ['酱', '醋', '料酒', '油', '汁'], icon: '/images/ing-sauce.png' }
+];
+
+function getIngredientIcon(name = '') {
+  const matched = ingredientIconMap.find(item =>
+    item.keywords.some(keyword => name.includes(keyword))
+  );
+  return matched ? matched.icon : '/images/ing-generic.png';
+}
+
 Page({
   data: {
     dish: null,
@@ -24,10 +45,16 @@ Page({
 
     const db = wx.cloud.database();
     db.collection('dishes').doc(id).get({
-      success: res => {
+      success: async res => {
+        const dish = await attachDisplayImage(res.data);
+        dish.ingredients = (dish.ingredients || []).map(item => ({
+          ...item,
+          icon: getIngredientIcon(item.name)
+        }));
+
         wx.hideLoading();
         this.setData({
-          dish: res.data
+          dish
         });
       },
       fail: err => {
@@ -73,6 +100,7 @@ Page({
         name: dish.name,
         price: dish.price,
         image: dish.image,
+        displayImage: dish.displayImage,
         quantity: this.data.count,
         addTime: db.serverDate()
       },
@@ -116,7 +144,7 @@ Page({
       return {
         title: this.data.dish.name,
         path: `/pages/detail/detail?id=${this.data.dish._id}`,
-        imageUrl: this.data.dish.image
+        imageUrl: this.data.dish.displayImage
       };
     }
   }
