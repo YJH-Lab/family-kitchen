@@ -1,0 +1,249 @@
+/* pages/orders/orders.wxss */
+.container {
+  min-height: 100vh;
+  background-color: #f6f7f4;
+  padding: 24rpx 28rpx 48rpx;
+  box-sizing: border-box;
+}
+
+.summary-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ffffff;
+  border-radius: 18rpx;
+  padding: 30rpx;
+  box-shadow: 0 5rpx 18rpx rgba(0, 0, 0, 0.04);
+}
+
+.summary-label {
+  color: #8c8c8c;
+  font-size: 30rpx;
+}
+
+.summary-value {
+  margin-top: 12rpx;
+  color: #111111;
+  font-size: 56rpx;
+  line-height: 1;
+  font-weight: 800;
+}
+
+.summary-unit {
+  margin-left: 6rpx;
+  color: #8c8c8c;
+  font-size: 28rpx;
+  font-weight: 600;
+}
+
+.summary-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.summary-price {
+  color: #d97845;
+  font-size: 42rpx;
+  font-weight: 800;
+}
+
+.summary-desc {
+  margin-top: 8rpx;
+  color: #8c8c8c;
+  font-size: 26rpx;
+}
+
+.order-list {
+  margin-top: 18rpx;
+}
+
+.order-card {
+  margin-bottom: 18rpx;
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  padding: 26rpx 24rpx;
+  box-shadow: 0 5rpx 18rpx rgba(0, 0, 0, 0.04);
+}
+
+.order-top,
+.order-bottom,
+.dish-row {
+  display: flex;
+  align-items: center;
+}
+
+.order-top,
+.order-bottom {
+  justify-content: space-between;
+}
+
+.order-date {
+  display: block;
+  color: #111111;
+  font-size: 32rpx;
+  font-weight: 800;
+}
+
+.order-no {
+  display: block;
+  margin-top: 8rpx;
+  color: #8c8c8c;
+  font-size: 24rpx;
+}
+
+.status-pill {
+  flex-shrink: 0;
+  padding: 8rpx 18rpx;
+  border-radius: 24rpx;
+  background-color: #eef7f0;
+  color: #5e9f6b;
+  font-size: 24rpx;
+  font-weight: 700;
+}
+
+.item-list {
+  margin-top: 24rpx;
+  padding: 18rpx 0;
+  border-top: 1rpx solid #ececec;
+  border-bottom: 1rpx solid #ececec;
+}
+
+.dish-row {
+  min-height: 48rpx;
+}
+
+.dish-name {
+  flex: 1;
+  min-width: 0;
+  color: #111111;
+  font-size: 28rpx;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dish-meta {
+  width: 70rpx;
+  color: #8c8c8c;
+  font-size: 26rpx;
+  text-align: center;
+}
+
+.dish-price {
+  width: 120rpx;
+  color: #d97845;
+  font-size: 28rpx;
+  font-weight: 700;
+  text-align: right;
+}
+
+.order-bottom {
+  margin-top: 20rpx;
+}
+
+.order-count {
+  color: #8c8c8c;
+  font-size: 26rpx;
+}
+
+.order-actions {
+  display: flex;
+  align-items: center;
+}
+
+.order-total {
+  margin-right: 18rpx;
+  color: #d97845;
+  font-size: 34rpx;
+  font-weight: 800;
+}
+
+.delete-btn {
+  width: 92rpx !important;
+  height: 46rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 24rpx;
+  background-color: #f6f0ec;
+  color: #c66c3d;
+  font-size: 24rpx;
+  line-height: normal;
+  margin-left: 12rpx;
+}
+
+.reorder-btn {
+  width: 130rpx !important;
+  height: 46rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 24rpx;
+  background-color: #75b884;
+  color: #ffffff;
+  font-size: 24rpx;
+  line-height: normal;
+}
+
+.dish-row-tappable {
+  padding: 12rpx 0;
+  position: relative;
+}
+
+.dish-add-icon {
+  width: 40rpx;
+  height: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 12rpx;
+  border-radius: 50%;
+  background-color: #75b884;
+  color: #ffffff;
+  font-size: 28rpx;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.empty-state {
+  margin-top: 120rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.empty-icon {
+  width: 190rpx;
+  height: 190rpx;
+}
+
+.empty-title {
+  margin-top: 24rpx;
+  color: #111111;
+  font-size: 32rpx;
+  font-weight: 700;
+}
+
+.empty-desc {
+  margin-top: 12rpx;
+  color: #8c8c8c;
+  font-size: 26rpx;
+}
+
+.primary-btn {
+  margin-top: 28rpx;
+  min-width: 220rpx;
+  height: 76rpx;
+  padding: 0 34rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 40rpx;
+  background-color: #75b884;
+  color: #ffffff;
+  font-size: 30rpx;
+  font-weight: 700;
+  line-height: normal;
+}

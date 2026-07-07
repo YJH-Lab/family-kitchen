@@ -163,6 +163,7 @@
 }
 
 .order-main {
+  flex: 1;
   min-width: 0;
 }
 
@@ -185,11 +186,32 @@
 }
 
 .order-amount {
-  margin-left: 24rpx;
   color: #d97845;
   font-size: 32rpx;
   font-weight: 800;
+}
+
+.order-actions {
+  margin-left: 24rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
   flex-shrink: 0;
+}
+
+.delete-btn {
+  margin-top: 10rpx;
+  width: 92rpx !important;
+  height: 46rpx;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 24rpx;
+  background-color: #f6f0ec;
+  color: #c66c3d;
+  font-size: 24rpx;
+  line-height: normal;
 }
 
 .empty-state {
@@ -213,6 +235,63 @@
 
 .empty-desc {
   margin-top: 12rpx;
+  color: #8c8c8c;
+  font-size: 26rpx;
+}
+
+.top-dish-item {
+  display: flex;
+  align-items: center;
+  padding: 16rpx 0;
+  border-bottom: 1rpx solid #ececec;
+}
+
+.top-dish-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.rank-medal {
+  width: 48rpx;
+  height: 48rpx;
+  border-radius: 24rpx;
+  background-color: #eef2ec;
+  color: #777777;
+  font-size: 24rpx;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 24rpx;
+  flex-shrink: 0;
+}
+
+.rank-medal.rank-1 {
+  background-color: #ffd700;
+  color: #fff;
+}
+
+.rank-medal.rank-2 {
+  background-color: #c0c0c0;
+  color: #fff;
+}
+
+.rank-medal.rank-3 {
+  background-color: #cd7f32;
+  color: #fff;
+}
+
+.top-dish-name {
+  flex: 1;
+  color: #111111;
+  font-size: 28rpx;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.top-dish-count {
   color: #8c8c8c;
   font-size: 26rpx;
 }

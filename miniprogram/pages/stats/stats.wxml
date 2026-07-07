@@ -43,6 +43,17 @@
     </block>
   </view>
 
+  <view class="section-card" wx:if="{{hasTopDishes}}">
+    <view class="section-title">最爱菜品 Top 10</view>
+    <block wx:for="{{topDishes}}" wx:key="dishId">
+      <view class="top-dish-item">
+        <view class="rank-medal rank-{{index + 1}}">{{index + 1}}</view>
+        <text class="top-dish-name">{{item.name}}</text>
+        <text class="top-dish-count">{{item.count}} 次</text>
+      </view>
+    </block>
+  </view>
+
   <view class="section-card" wx:if="{{hasRecent}}">
     <view class="section-title">点餐记录</view>
     <block wx:for="{{recentOrders}}" wx:key="_id">
@@ -51,7 +62,10 @@
           <text class="order-date">{{item.dateText}}</text>
           <text class="order-desc">{{item.itemNames}}</text>
         </view>
-        <text class="order-amount">¥{{item.totalText}}</text>
+        <view class="order-actions">
+          <text class="order-amount">¥{{item.totalText}}</text>
+          <button class="delete-btn" bindtap="deleteOrder" data-id="{{item._id}}">删除</button>
+        </view>
       </view>
     </block>
   </view>
@@ -59,6 +73,6 @@
   <view class="empty-state" wx:if="{{isEmpty}}">
     <image class="empty-icon" src="/images/ui-empty-order.png" mode="aspectFit"></image>
     <text class="empty-title">还没有点餐记录</text>
-    <text class="empty-desc">结算一次订单后，这里会自动统计花费</text>
+    <text class="empty-desc">确认一次订单后，这里会自动统计花费</text>
   </view>
 </view>

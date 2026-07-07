@@ -1,0 +1,57 @@
+<!--pages/orders/orders.wxml-->
+<view class="container">
+  <view class="summary-card">
+    <view>
+      <text class="summary-label">历史点餐记录</text>
+      <view class="summary-value">
+        <text>{{orderCount}}</text>
+        <text class="summary-unit">单</text>
+      </view>
+    </view>
+    <view class="summary-right">
+      <text class="summary-price">¥{{totalAmount}}</text>
+      <text class="summary-desc">累计花费</text>
+    </view>
+  </view>
+
+  <view class="order-list" wx:if="{{hasOrders}}">
+    <block wx:for="{{orders}}" wx:key="_id">
+      <view class="order-card">
+        <view class="order-top">
+          <view>
+            <text class="order-date">{{item.dateText}}</text>
+            <text class="order-no">{{item.orderNo}}</text>
+          </view>
+          <view class="status-pill">{{item.statusText}}</view>
+        </view>
+
+        <view class="item-list">
+          <block wx:for="{{item.items}}" wx:for-item="dish" wx:key="name">
+            <view class="dish-row dish-row-tappable" bindtap="addDishToCart" data-dish="{{dish}}">
+              <text class="dish-name">{{dish.name}}</text>
+              <text class="dish-meta">x{{dish.quantity}}</text>
+              <text class="dish-price">¥{{dish.subtotalText}}</text>
+              <text class="dish-add-icon">+</text>
+            </view>
+          </block>
+        </view>
+
+        <view class="order-bottom">
+          <text class="order-count">共 {{item.itemCount}} 份</text>
+          <view class="order-actions">
+            <text class="order-total">¥{{item.totalText}}</text>
+            <button class="reorder-btn" bindtap="reorderAll" data-order-index="{{index}}">再来一单</button>
+            <button class="delete-btn" bindtap="deleteOrder" data-id="{{item._id}}">删除</button>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <view class="empty-state" wx:if="{{isEmpty}}">
+    <image class="empty-icon" src="/images/ui-empty-order.png" mode="aspectFit"></image>
+    <text class="empty-title">还没有订单记录</text>
+    <text class="empty-desc">确认一次订单后，这里会自动保存</text>
+    <button class="primary-btn" bindtap="goToOrder">查看当前订单</button>
+  </view>
+</view>

@@ -1,16 +1,17 @@
 <!--pages/user/user.wxml-->
 <view class="container">
   <!-- 顶部用户信息 -->
-  <view class="user-header">
-    <image class="avatar" src="/images/ui-avatar.png" mode="aspectFill"></image>
+  <view class="user-header" bindtap="goToProfile">
+    <image class="avatar" src="{{userInfo.avatarUrl || '/images/ui-avatar.png'}}" mode="aspectFill"></image>
     <view class="user-info">
-      <text class="user-name">点餐爱好者</text>
+      <text class="user-name">{{userInfo.nickName || '点击设置个人资料'}}</text>
     </view>
+    <text class="menu-arrow header-arrow">›</text>
   </view>
 
   <!-- 订单状态区 -->
   <view class="order-status-card">
-    <view class="card-title-row">
+    <view class="card-title-row" bindtap="openOrders">
       <view class="title-left">
         <image class="title-icon" src="/images/ui-order.png" mode="aspectFit"></image>
         <text class="card-title">我的订单</text>
@@ -19,7 +20,7 @@
     </view>
     <view class="status-row">
       <block wx:for="{{orderStatusList}}" wx:key="title">
-        <view class="status-item">
+        <view class="status-item" bindtap="openMenu" data-url="{{item.url}}">
           <image class="status-icon" src="{{item.icon}}" mode="aspectFit"></image>
           <text class="status-text">{{item.title}}</text>
         </view>

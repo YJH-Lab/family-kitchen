@@ -33,7 +33,7 @@
   display: flex;
   background-color: #ffffff;
   padding: 0 18rpx;
-  height: 94rpx;
+  height: 100rpx;
   align-items: center;
   white-space: nowrap;
   border-bottom: 1rpx solid #ededed;
@@ -47,7 +47,7 @@
   justify-content: center;
   height: 100%;
   position: relative;
-  font-size: 36rpx;
+  font-size: 39rpx;
   color: #111111;
   font-weight: 600;
 }
@@ -59,15 +59,16 @@
 .indicator {
   position: absolute;
   bottom: 3rpx;
-  width: 42rpx;
-  height: 6rpx;
+  width: 48rpx;
+  height: 7rpx;
   background-color: #75b884;
   border-radius: 3rpx;
 }
 
 /* 列表区 */
 .dish-list {
-  padding: 22rpx 26rpx 28rpx;
+  padding: 22rpx 26rpx 180rpx;
+  padding-bottom: calc(180rpx + env(safe-area-inset-bottom));
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 22rpx;

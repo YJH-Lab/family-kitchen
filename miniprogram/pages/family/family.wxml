@@ -1,0 +1,32 @@
+<!--pages/family/family.wxml-->
+<view class="container" wx:if="{{family}}">
+  <view class="family-card">
+    <image class="family-icon" src="/images/ui-family.png" mode="aspectFit"></image>
+    <view class="family-info">
+      <text class="family-name">{{family.name}}</text>
+      <text class="family-code">加入码：{{family.joinCode}}</text>
+    </view>
+  </view>
+
+  <view class="members-section">
+    <text class="section-title">家庭成员 ({{members.length}})</text>
+    <view class="member-list">
+      <block wx:for="{{members}}" wx:key="_id">
+        <view class="member-item">
+          <image class="avatar" src="{{item.avatarUrl || '/images/ui-avatar.png'}}"></image>
+          <view class="member-info">
+            <text class="nickname">{{item.nickName || '用户 (' + item.shortId + ')'}}</text>
+            <text class="role" wx:if="{{item.openid === family.creator}}">创建者</text>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <view class="footer-area">
+    <button class="invite-btn" open-type="share">邀请家人加入</button>
+  </view>
+</view>
+<view class="loading-container" wx:else>
+  <text>加载中...</text>
+</view>

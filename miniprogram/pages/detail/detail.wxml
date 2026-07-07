@@ -8,7 +8,10 @@
     <view class="info-header">
       <view class="name-price">
         <text class="dish-name">{{dish.name}}</text>
-        <text class="dish-price">¥{{dish.price}}</text>
+        <view class="price-container">
+          <text class="dish-price">¥{{dish.price}}</text>
+          <view class="edit-btn" bindtap="editPrice">✏️</view>
+        </view>
       </view>
 
       <!-- 数量调节器 -->

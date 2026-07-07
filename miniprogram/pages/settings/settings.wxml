@@ -1,0 +1,54 @@
+<!--pages/settings/settings.wxml-->
+<view class="container">
+  <view class="section-card">
+    <view class="section-title">统计偏好</view>
+    <view class="setting-row">
+      <view>
+        <text class="setting-title">默认统计周期</text>
+        <text class="setting-desc">进入消费统计时默认选中的范围</text>
+      </view>
+    </view>
+    <view class="range-tabs">
+      <view class="range-item {{defaultStatsRange === 'week' ? 'active' : ''}}" bindtap="setStatsRange" data-mode="week">周</view>
+      <view class="range-item {{defaultStatsRange === 'month' ? 'active' : ''}}" bindtap="setStatsRange" data-mode="month">月</view>
+      <view class="range-item {{defaultStatsRange === 'year' ? 'active' : ''}}" bindtap="setStatsRange" data-mode="year">年</view>
+    </view>
+  </view>
+
+  <view class="section-card">
+    <view class="section-title">操作习惯</view>
+    <view class="setting-row">
+      <view>
+        <text class="setting-title">删除前确认</text>
+        <text class="setting-desc">删除订单或消费记录前弹窗提醒</text>
+      </view>
+      <switch checked="{{confirmBeforeDelete}}" color="#75b884" bindchange="toggleConfirmBeforeDelete"></switch>
+    </view>
+  </view>
+
+  <view class="section-card">
+    <view class="section-title">数据整理</view>
+    <view class="action-row" bindtap="clearCart">
+      <view>
+        <text class="setting-title">清空当前订单</text>
+        <text class="setting-desc">只清空还没确认的购物车菜品</text>
+      </view>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="action-row last" bindtap="clearCache">
+      <view>
+        <text class="setting-title">清理本地缓存</text>
+        <text class="setting-desc">保留设置偏好，只清理临时缓存</text>
+      </view>
+      <text class="menu-arrow">›</text>
+    </view>
+  </view>
+
+  <view class="about-card">
+    <image class="about-icon" src="/images/ui-settings.png" mode="aspectFit"></image>
+    <view>
+      <text class="about-title">家庭点餐</text>
+      <text class="about-desc">用于两个人日常点餐、确认完成和统计花费。</text>
+    </view>
+  </view>
+</view>

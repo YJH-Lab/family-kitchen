@@ -1,0 +1,118 @@
+/* pages/family/family.wxss */
+.container {
+  padding: 30rpx;
+  background-color: #f6f7f4;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: #8c8c8c;
+}
+
+.family-card {
+  background-color: #ffffff;
+  border-radius: 20rpx;
+  padding: 40rpx;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.04);
+  margin-bottom: 40rpx;
+}
+
+.family-icon {
+  width: 100rpx;
+  height: 100rpx;
+  margin-right: 30rpx;
+}
+
+.family-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.family-name {
+  font-size: 38rpx;
+  font-weight: bold;
+  color: #111;
+  margin-bottom: 8rpx;
+}
+
+.family-code {
+  font-size: 28rpx;
+  color: #8c8c8c;
+}
+
+.members-section {
+  background-color: #ffffff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.04);
+}
+
+.section-title {
+  display: block;
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #111;
+  margin-bottom: 30rpx;
+}
+
+.member-item {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.member-item:last-child {
+  border-bottom: none;
+}
+
+.avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 40rpx;
+  margin-right: 24rpx;
+  background-color: #f6f0ec;
+}
+
+.member-info {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nickname {
+  font-size: 30rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+.role {
+  font-size: 24rpx;
+  color: #d97845;
+  background-color: #fcf1eb;
+  padding: 4rpx 12rpx;
+  border-radius: 8rpx;
+}
+
+.footer-area {
+  margin-top: 60rpx;
+}
+
+.invite-btn {
+  background-color: #75b884;
+  color: #ffffff;
+  border-radius: 44rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  height: 88rpx;
+  line-height: 88rpx;
+  width: 100% !important;
+}

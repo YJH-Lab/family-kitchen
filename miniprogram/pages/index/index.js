@@ -1,17 +1,21 @@
-// pages/index/index.js
 import { attachDisplayImages } from '../../utils/cloud-image.js';
+
+const app = getApp();
 
 Page({
   data: {
-    categories: ['特色', '冷菜', '热菜', '汤'],
+    categories: ['特色', '冷菜', '热菜', '汤', '主食'],
     currentCategory: '特色',
     dishes: [],
     allDishes: [],
     searchText: ''
   },
 
-  onLoad: function (options) {
-    this.fetchDishes();
+  onLoad: async function (options) {
+    const hasFamily = await app.checkFamily();
+    if (hasFamily) {
+      this.fetchDishes();
+    }
   },
 
   fetchDishes: async function (category = this.data.currentCategory) {
@@ -26,7 +30,7 @@ Page({
     try {
       while (true) {
         const res = await collection
-          .where({ category })
+          .where({ category, familyId: app.globalData.familyId })
           .skip(skip)
           .limit(pageSize)
           .get();
@@ -39,7 +43,7 @@ Page({
       wx.hideLoading();
       this.setData({
         allDishes: dishes,
-        dishes
+        dishes: this.filterByKeyword(dishes, this.data.searchText)
       });
     } catch (err) {
       wx.hideLoading();
@@ -51,26 +55,32 @@ Page({
   switchCategory: function (e) {
     const category = e.currentTarget.dataset.category;
     this.setData({
-      currentCategory: category,
-      searchText: ''
+      currentCategory: category
     });
     this.fetchDishes(category);
   },
 
   onSearchInput: function (e) {
-    this.setData({ searchText: e.detail.value });
+    const searchText = e.detail.value;
+    this.setData({
+      searchText,
+      dishes: this.filterByKeyword(this.data.allDishes, searchText)
+    });
   },
 
   onSearch: function () {
-    const keyword = this.data.searchText.trim();
-    if (!keyword) {
-      this.setData({ dishes: this.data.allDishes });
-      return;
-    }
-    const results = this.data.allDishes.filter(item =>
-      item.name.includes(keyword) || item.desc.includes(keyword)
+    this.setData({
+      dishes: this.filterByKeyword(this.data.allDishes, this.data.searchText)
+    });
+  },
+
+  filterByKeyword: function (dishes, keyword) {
+    const text = String(keyword || '').trim();
+    if (!text) return dishes;
+
+    return dishes.filter(item =>
+      item.name.includes(text) || item.desc.includes(text)
     );
-    this.setData({ dishes: results });
   },
 
   goToDetail: function (e) {
@@ -99,6 +109,7 @@ Page({
         image: dish.image,
         displayImage: dish.displayImage,
         quantity: 1,
+        familyId: app.globalData.familyId,
         addTime: db.serverDate()
       },
       success: res => {
@@ -121,7 +132,11 @@ Page({
   },
 
   onReady: function () {},
-  onShow: function () {},
+  onShow: function () {
+    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
+      this.getTabBar().setData({ selected: 0 });
+    }
+  },
   onHide: function () {},
   onUnload: function () {},
   onPullDownRefresh: function () {

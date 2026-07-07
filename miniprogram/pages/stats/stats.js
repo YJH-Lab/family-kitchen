@@ -89,6 +89,8 @@ function getTrendBuckets(mode, range) {
   return buckets;
 }
 
+const app = getApp();
+
 Page({
   data: {
     activeMode: 'month',
@@ -105,7 +107,14 @@ Page({
     averageAmount: '0.00',
     orderCount: 0,
     trendItems: [],
-    recentOrders: []
+    recentOrders: [],
+    topDishes: [],
+    hasTopDishes: false
+  },
+
+  onLoad: function () {
+    const defaultStatsRange = wx.getStorageSync('familyKitchen.defaultStatsRange') || 'month';
+    this.applyMode(defaultStatsRange);
   },
 
   onShow: function () {
@@ -114,6 +123,11 @@ Page({
 
   switchMode: function (e) {
     const mode = e.currentTarget.dataset.mode;
+    this.applyMode(mode);
+    this.fetchOrders();
+  },
+
+  applyMode: function (mode) {
     this.setData({
       activeMode: mode,
       weekTabClass: mode === 'week' ? 'active' : '',
@@ -121,7 +135,6 @@ Page({
       yearTabClass: mode === 'year' ? 'active' : '',
       loading: true
     });
-    this.fetchOrders();
   },
 
   fetchOrders: async function () {
@@ -138,7 +151,8 @@ Page({
       while (true) {
         const res = await db.collection('orders')
           .where({
-            createdAtLocal: _.gte(range.start.getTime()).and(_.lt(range.end.getTime()))
+            createdAtLocal: _.gte(range.start.getTime()).and(_.lt(range.end.getTime())),
+            familyId: app.globalData.familyId
           })
           .orderBy('createdAtLocal', 'desc')
           .skip(skip)
@@ -159,6 +173,51 @@ Page({
       this.setData({ loading: false });
       wx.showToast({
         title: '统计失败',
+        icon: 'none'
+      });
+    }
+  },
+
+  deleteOrder: function (e) {
+    const id = e.currentTarget.dataset.id;
+    if (!id) return;
+
+    const confirmBeforeDelete = wx.getStorageSync('familyKitchen.confirmBeforeDelete') !== false;
+    if (!confirmBeforeDelete) {
+      this.removeOrder(id);
+      return;
+    }
+
+    wx.showModal({
+      title: '删除记录',
+      content: '确定删除这条消费记录吗？删除后统计金额会重新计算。',
+      confirmText: '删除',
+      confirmColor: '#d97845',
+      success: res => {
+        if (res.confirm) this.removeOrder(id);
+      }
+    });
+  },
+
+  removeOrder: async function (id) {
+    wx.showLoading({
+      title: '删除中...',
+      mask: true
+    });
+
+    try {
+      await wx.cloud.database().collection('orders').doc(id).remove();
+      wx.hideLoading();
+      wx.showToast({
+        title: '已删除',
+        icon: 'success'
+      });
+      this.fetchOrders();
+    } catch (err) {
+      wx.hideLoading();
+      console.error('删除消费记录失败：', err);
+      wx.showToast({
+        title: '删除失败',
         icon: 'none'
       });
     }
@@ -200,6 +259,24 @@ Page({
       };
     });
 
+    const dishCounts = {};
+    filtered.forEach(order => {
+      (order.items || []).forEach(item => {
+        if (!dishCounts[item.dishId]) {
+          dishCounts[item.dishId] = {
+            dishId: item.dishId,
+            name: item.name,
+            count: 0
+          };
+        }
+        dishCounts[item.dishId].count += item.quantity || 1;
+      });
+    });
+
+    const topDishes = Object.values(dishCounts)
+      .sort((a, b) => b.count - a.count)
+      .slice(0, 10);
+
     this.setData({
       periodTitle: range.title,
       totalAmount: formatMoney(total),
@@ -208,8 +285,10 @@ Page({
       isEmpty: !this.data.loading && filtered.length === 0,
       hasTrend: trendItems.length > 0,
       hasRecent: recentOrders.length > 0,
+      hasTopDishes: topDishes.length > 0,
       trendItems,
-      recentOrders
+      recentOrders,
+      topDishes
     });
   }
 });

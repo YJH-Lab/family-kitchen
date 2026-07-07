@@ -1,0 +1,23 @@
+<!--pages/profile/profile.wxml-->
+<view class="container">
+  <view class="header-tips">
+    <text>完善个人信息，让家人更容易认出你</text>
+  </view>
+
+  <view class="form-group">
+    <view class="form-item avatar-item">
+      <text class="label">头像</text>
+      <button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
+        <image class="avatar" src="{{avatarUrl || '/images/ui-avatar.png'}}" mode="aspectFill"></image>
+      </button>
+      <text class="arrow">›</text>
+    </view>
+    
+    <view class="form-item">
+      <text class="label">昵称</text>
+      <input type="nickname" class="nickname-input" placeholder="请输入昵称" value="{{nickName}}" bindblur="onInputNickname" />
+    </view>
+  </view>
+
+  <button class="save-btn" bindtap="saveProfile">保存资料</button>
+</view>
