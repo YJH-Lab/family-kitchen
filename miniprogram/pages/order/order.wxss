@@ -3,31 +3,31 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #f6f6f6;
+  background-color: #f6f7f4;
   position: relative;
 }
 
 /* 购物车列表 */
 .cart-list {
   flex: 1;
-  padding: 20rpx;
+  padding: 24rpx 28rpx;
   box-sizing: border-box;
 }
 
 .cart-item {
   display: flex;
   background-color: #ffffff;
-  padding: 20rpx;
-  border-radius: 12rpx;
-  margin-bottom: 20rpx;
-  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+  padding: 18rpx;
+  border-radius: 16rpx;
+  margin-bottom: 18rpx;
+  box-shadow: 0 5rpx 18rpx rgba(0, 0, 0, 0.04);
 }
 
 .item-image {
   width: 160rpx;
   height: 160rpx;
-  border-radius: 8rpx;
-  background-color: #e0e0e0;
+  border-radius: 12rpx;
+  background-color: #eeeeec;
   margin-right: 20rpx;
 }
 
@@ -45,15 +45,16 @@
 }
 
 .item-name {
-  font-size: 32rpx;
-  font-weight: bold;
-  color: #333;
+  font-size: 34rpx;
+  font-weight: 700;
+  color: #111111;
 }
 
+
 .item-delete {
-  font-size: 24rpx;
-  color: #999;
-  padding: 10rpx; /* 增加点击区域 */
+  font-size: 26rpx;
+  color: #9a9a9a;
+  padding: 10rpx;
 }
 
 .item-bottom {
@@ -63,24 +64,64 @@
 }
 
 .item-price {
-  font-size: 32rpx;
-  color: #e64340;
-  font-weight: bold;
+  font-size: 34rpx;
+  color: #d97845;
+  font-weight: 700;
 }
 
-.item-quantity {
-  font-size: 28rpx;
-  color: #666;
+.quantity-control {
+  display: flex;
+  align-items: center;
+}
+
+.qty-btn {
+  width: 48rpx;
+  height: 48rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 30rpx;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.qty-minus {
+  background-color: #f0f0f0;
+  color: #666666;
+}
+
+.qty-plus {
+  background-color: #75b884;
+  color: #ffffff;
+}
+
+.qty-value {
+  width: 60rpx;
+  text-align: center;
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #111111;
+}
+
+.qty-confirm {
+  margin-left: 12rpx;
+  padding: 0 20rpx;
+  border-radius: 24rpx;
+  background-color: #d97845;
+  color: #ffffff;
+  font-size: 26rpx;
+  width: auto;
 }
 
 .bottom-padding {
-  height: 120rpx; /* 留出底部结算栏的空间 */
+  height: calc(220rpx + env(safe-area-inset-bottom));
 }
 
-/* 底部结算栏 */
+/* 底部确认栏 */
 .checkout-bar {
   position: fixed;
-  bottom: 0;
+  bottom: calc(112rpx + env(safe-area-inset-bottom));
   left: 0;
   right: 0;
   height: 110rpx;
@@ -89,37 +130,42 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 30rpx;
-  box-shadow: 0 -2rpx 10rpx rgba(0, 0, 0, 0.05);
+  box-shadow: 0 -4rpx 18rpx rgba(0, 0, 0, 0.06);
   z-index: 100;
-  padding-bottom: env(safe-area-inset-bottom);
 }
 
 .total-info {
   display: flex;
   align-items: baseline;
+  flex: 1;
 }
 
 .total-label {
-  font-size: 28rpx;
-  color: #333;
+  font-size: 30rpx;
+  color: #111111;
 }
 
 .total-price {
   font-size: 40rpx;
-  color: #e64340;
-  font-weight: bold;
+  color: #d97845;
+  font-weight: 700;
 }
 
 .btn-checkout {
   width: 240rpx !important;
   height: 80rpx;
-  line-height: 80rpx;
-  background-color: #82B28B;
+  line-height: normal;
+  background-color: #75b884;
   color: #ffffff;
-  font-size: 32rpx;
+  font-size: 34rpx;
   border-radius: 40rpx;
-  margin: 0;
+  margin: 0 !important;
   padding: 0;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 /* 空状态 */
@@ -129,26 +175,33 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding-bottom: calc(220rpx + env(safe-area-inset-bottom));
 }
 
 .empty-image {
-  width: 200rpx;
-  height: 200rpx;
-  margin-bottom: 30rpx;
+  width: 210rpx;
+  height: 210rpx;
+  margin-bottom: 26rpx;
 }
 
 .empty-text {
-  font-size: 28rpx;
-  color: #999;
+  font-size: 30rpx;
+  color: #8c8c8c;
   margin-bottom: 40rpx;
 }
 
 .btn-go-menu {
   width: 240rpx !important;
-  height: 70rpx;
-  line-height: 70rpx;
-  background-color: #82B28B;
+  height: 76rpx;
+  line-height: normal;
+  background-color: #75b884;
   color: #ffffff;
-  font-size: 28rpx;
-  border-radius: 35rpx;
+  font-size: 30rpx;
+  border-radius: 38rpx;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  box-sizing: border-box;
 }

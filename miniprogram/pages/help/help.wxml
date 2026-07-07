@@ -1,0 +1,53 @@
+<!--pages/help/help.wxml-->
+<view class="container">
+  <view class="hero-card">
+    <image class="hero-icon" src="/images/ui-help.png" mode="aspectFit"></image>
+    <view>
+      <text class="hero-title">使用指引</text>
+      <text class="hero-desc">家庭点餐主要用来记录每天吃了什么、花了多少钱。</text>
+    </view>
+  </view>
+
+  <view class="guide-card">
+    <view class="guide-item">
+      <text class="guide-index">1</text>
+      <view>
+        <text class="guide-title">找菜和筛选</text>
+        <text class="guide-desc">在首页顶部搜索菜名，或者切换分类查看对应菜品；搜索内容会保留，不会因为切换分类自动清空。</text>
+      </view>
+    </view>
+    <view class="guide-item">
+      <text class="guide-index">2</text>
+      <view>
+        <text class="guide-title">加入当前订单</text>
+        <text class="guide-desc">进入菜品详情后可以查看用料和步骤，再把想吃的菜加入当前订单。</text>
+      </view>
+    </view>
+    <view class="guide-item">
+      <text class="guide-index">3</text>
+      <view>
+        <text class="guide-title">确认完成</text>
+        <text class="guide-desc">在订单页确认后，会生成一条已完成记录，并自动清空当前订单。</text>
+      </view>
+    </view>
+    <view class="guide-item">
+      <text class="guide-index">4</text>
+      <view>
+        <text class="guide-title">查看花费</text>
+        <text class="guide-desc">消费统计支持按周、月、年查看总花费、平均每次花费和最近点餐记录。</text>
+      </view>
+    </view>
+    <view class="guide-item last">
+      <text class="guide-index">5</text>
+      <view>
+        <text class="guide-title">删除记录</text>
+        <text class="guide-desc">在我的订单或消费统计里删除记录后，统计金额会自动重新计算。</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="note-card">
+    <text class="note-title">数据说明</text>
+    <text class="note-desc">菜品价格、描述、用料和步骤来自云数据库；确认完成后的订单会保存在 orders 集合，用于订单记录和消费统计。</text>
+  </view>
+</view>

@@ -3,8 +3,8 @@
   <!-- 顶部搜索框 -->
   <view class="search-container">
     <view class="search-box">
-      <icon type="search" size="14" color="#999"></icon>
-      <input class="search-input" placeholder="搜索菜品..." placeholder-style="color:#999;" />
+      <icon type="search" size="16" color="#b7b7b7"></icon>
+      <input class="search-input" placeholder="搜索" placeholder-style="color:#b7b7b7;" bindinput="onSearchInput" bindconfirm="onSearch" value="{{searchText}}" />
     </view>
   </view>
 
@@ -22,7 +22,7 @@
   <view class="dish-list">
     <block wx:for="{{dishes}}" wx:key="_id">
       <view class="dish-card" bindtap="goToDetail" data-id="{{item._id}}">
-        <image class="dish-image" src="{{item.image}}" mode="aspectFill"></image>
+        <image class="dish-image" src="{{item.displayImage}}" mode="aspectFill"></image>
         <view class="dish-info">
           <text class="dish-name">{{item.name}}</text>
           <text class="dish-desc">{{item.desc}}</text>

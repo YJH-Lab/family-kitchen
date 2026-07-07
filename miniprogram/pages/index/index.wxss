@@ -3,39 +3,40 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #f6f6f6;
+  background-color: #f6f7f4;
 }
 
 /* 搜索框 */
 .search-container {
-  padding: 20rpx 30rpx;
+  padding: 24rpx 26rpx 14rpx;
   background-color: #ffffff;
 }
 
 .search-box {
   display: flex;
   align-items: center;
-  background-color: #f0f0f0;
-  height: 64rpx;
-  border-radius: 32rpx;
-  padding: 0 20rpx;
+  background: linear-gradient(180deg, #f0f0ef 0%, #ecebea 100%);
+  height: 70rpx;
+  border-radius: 36rpx;
+  padding: 0 24rpx;
 }
 
 .search-input {
   flex: 1;
-  font-size: 26rpx;
-  margin-left: 10rpx;
-  color: #333;
+  font-size: 28rpx;
+  margin-left: 14rpx;
+  color: #151515;
 }
 
 /* 导航栏 */
 .nav-bar {
   display: flex;
   background-color: #ffffff;
-  padding: 0 10rpx;
-  height: 80rpx;
+  padding: 0 18rpx;
+  height: 100rpx;
   align-items: center;
   white-space: nowrap;
+  border-bottom: 1rpx solid #ededed;
 }
 
 .nav-item {
@@ -46,30 +47,31 @@
   justify-content: center;
   height: 100%;
   position: relative;
-  font-size: 28rpx;
-  color: #666;
+  font-size: 39rpx;
+  color: #111111;
+  font-weight: 600;
 }
 
 .nav-item.active {
-  font-weight: bold;
-  color: #333;
+  color: #75b884;
 }
 
 .indicator {
   position: absolute;
-  bottom: 0;
-  width: 40rpx;
-  height: 6rpx;
-  background-color: #82B28B;
+  bottom: 3rpx;
+  width: 48rpx;
+  height: 7rpx;
+  background-color: #75b884;
   border-radius: 3rpx;
 }
 
 /* 列表区 */
 .dish-list {
-  padding: 20rpx;
+  padding: 22rpx 26rpx 180rpx;
+  padding-bottom: calc(180rpx + env(safe-area-inset-bottom));
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 20rpx;
+  gap: 22rpx;
 }
 
 .dish-card {
@@ -78,26 +80,26 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+  box-shadow: 0 5rpx 18rpx rgba(0, 0, 0, 0.05);
 }
 
 .dish-image {
   width: 100%;
-  height: 240rpx;
-  background-color: #e0e0e0;
+  height: 260rpx;
+  background-color: #eeeeec;
 }
 
 .dish-info {
-  padding: 16rpx;
+  padding: 18rpx 18rpx 16rpx;
   display: flex;
   flex-direction: column;
   flex: 1;
 }
 
 .dish-name {
-  font-size: 28rpx;
-  font-weight: bold;
-  color: #333;
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #111111;
   margin-bottom: 8rpx;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -106,12 +108,13 @@
 }
 
 .dish-desc {
-  font-size: 22rpx;
-  color: #999;
-  margin-bottom: 16rpx;
+  font-size: 25rpx;
+  color: #8c8c8c;
+  line-height: 1.4;
+  margin-bottom: 14rpx;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
   overflow: hidden;
   flex: 1;
 }
@@ -125,15 +128,15 @@
 
 .dish-price {
   font-size: 32rpx;
-  color: #e64340;
-  font-weight: bold;
+  color: #d97845;
+  font-weight: 700;
 }
 
 .add-btn {
-  width: 44rpx;
-  height: 44rpx;
+  width: 54rpx;
+  height: 54rpx;
   border-radius: 50%;
-  background-color: #82B28B;
+  background-color: #75b884;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -141,16 +144,16 @@
 
 .add-icon {
   color: #ffffff;
-  font-size: 32rpx;
-  font-weight: bold;
-  line-height: 40rpx;
-  margin-top: -4rpx; /* 微调加号垂直居中 */
+  font-size: 40rpx;
+  font-weight: 400;
+  line-height: 1;
+  margin-top: -2rpx;
 }
 
 .empty-tip {
   grid-column: span 2;
   text-align: center;
   padding: 40rpx 0;
-  color: #999;
+  color: #8c8c8c;
   font-size: 28rpx;
 }

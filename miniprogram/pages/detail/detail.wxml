@@ -1,14 +1,17 @@
 <!--pages/detail/detail.wxml-->
 <view class="container" wx:if="{{dish}}">
   <!-- 顶部大图 -->
-  <image class="cover-image" src="{{dish.image}}" mode="aspectFill"></image>
+  <image class="cover-image" src="{{dish.displayImage}}" mode="aspectFill"></image>
 
   <!-- 信息区 -->
   <view class="info-card">
     <view class="info-header">
       <view class="name-price">
         <text class="dish-name">{{dish.name}}</text>
-        <text class="dish-price">¥{{dish.price}}</text>
+        <view class="price-container">
+          <text class="dish-price">¥{{dish.price}}</text>
+          <view class="edit-btn" bindtap="editPrice">✏️</view>
+        </view>
       </view>
 
       <!-- 数量调节器 -->
@@ -35,7 +38,10 @@
     <view class="ingredients-list">
       <block wx:for="{{dish.ingredients}}" wx:key="name">
         <view class="ingredient-item">
-          <text class="ing-name">{{item.name}}</text>
+          <view class="ing-main">
+            <image class="ing-icon" src="{{item.icon}}" mode="aspectFit"></image>
+            <text class="ing-name">{{item.name}}</text>
+          </view>
           <text class="ing-weight">{{item.weight}}</text>
         </view>
       </block>
@@ -51,6 +57,7 @@
             <view class="timeline-line" wx:if="{{index < dish.steps.length - 1}}"></view>
           </view>
           <view class="timeline-right">
+            <text class="step-label">步骤{{item.step}}：</text>
             <text class="step-text">{{item.text}}</text>
           </view>
         </view>

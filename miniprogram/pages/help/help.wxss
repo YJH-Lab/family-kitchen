@@ -1,0 +1,108 @@
+/* pages/help/help.wxss */
+.container {
+  min-height: 100vh;
+  background-color: #f6f7f4;
+  padding: 24rpx 28rpx 48rpx;
+  box-sizing: border-box;
+}
+
+.hero-card,
+.guide-card,
+.note-card {
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  box-shadow: 0 5rpx 18rpx rgba(0, 0, 0, 0.04);
+}
+
+.hero-card {
+  display: flex;
+  align-items: center;
+  padding: 30rpx 28rpx;
+}
+
+.hero-icon {
+  width: 84rpx;
+  height: 84rpx;
+  margin-right: 24rpx;
+  flex-shrink: 0;
+}
+
+.hero-title {
+  display: block;
+  color: #111111;
+  font-size: 38rpx;
+  font-weight: 800;
+}
+
+.hero-desc {
+  display: block;
+  margin-top: 8rpx;
+  color: #8c8c8c;
+  font-size: 26rpx;
+  line-height: 1.45;
+}
+
+.guide-card {
+  margin-top: 18rpx;
+  padding: 8rpx 24rpx;
+}
+
+.guide-item {
+  display: flex;
+  padding: 26rpx 0;
+  border-bottom: 1rpx solid #ececec;
+}
+
+.guide-item.last {
+  border-bottom: none;
+}
+
+.guide-index {
+  width: 48rpx;
+  height: 48rpx;
+  margin-right: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #eef7f0;
+  color: #5e9f6b;
+  font-size: 26rpx;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.guide-title {
+  display: block;
+  color: #111111;
+  font-size: 31rpx;
+  font-weight: 800;
+}
+
+.guide-desc {
+  display: block;
+  margin-top: 8rpx;
+  color: #777777;
+  font-size: 26rpx;
+  line-height: 1.55;
+}
+
+.note-card {
+  margin-top: 18rpx;
+  padding: 26rpx 24rpx;
+}
+
+.note-title {
+  display: block;
+  color: #111111;
+  font-size: 31rpx;
+  font-weight: 800;
+}
+
+.note-desc {
+  display: block;
+  margin-top: 10rpx;
+  color: #777777;
+  font-size: 26rpx;
+  line-height: 1.55;
+}

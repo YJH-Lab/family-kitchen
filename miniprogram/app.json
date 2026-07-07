@@ -3,35 +3,44 @@
     "pages/index/index",
     "pages/detail/detail",
     "pages/order/order",
-    "pages/user/user"
+    "pages/user/user",
+    "pages/profile/profile",
+    "pages/stats/stats",
+    "pages/orders/orders",
+    "pages/settings/settings",
+    "pages/help/help",
+    "pages/create-dish/create-dish",
+    "pages/onboarding/onboarding",
+    "pages/family/family"
   ],
   "window": {
-    "backgroundColor": "#F6F6F6",
+    "backgroundColor": "#F6F7F4",
     "navigationBarTitleText": "家庭点餐",
     "navigationBarBackgroundColor": "#FFFFFF",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
-    "color": "#999999",
-    "selectedColor": "#82B28B",
+    "custom": true,
+    "color": "#333333",
+    "selectedColor": "#75B884",
     "list": [
       {
         "pagePath": "pages/index/index",
         "text": "首页",
-        "iconPath": "",
-        "selectedIconPath": ""
+        "iconPath": "images/tab-home.png",
+        "selectedIconPath": "images/tab-home-active.png"
       },
       {
         "pagePath": "pages/order/order",
         "text": "订单",
-        "iconPath": "",
-        "selectedIconPath": ""
+        "iconPath": "images/tab-order.png",
+        "selectedIconPath": "images/tab-order-active.png"
       },
       {
         "pagePath": "pages/user/user",
         "text": "我",
-        "iconPath": "",
-        "selectedIconPath": ""
+        "iconPath": "images/tab-user.png",
+        "selectedIconPath": "images/tab-user-active.png"
       }
     ]
   },
