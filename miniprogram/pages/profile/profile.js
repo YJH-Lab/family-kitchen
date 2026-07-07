@@ -56,16 +56,15 @@ Page({
         finalAvatarUrl = uploadRes.fileID;
       }
 
-      // 更新数据库 users 表
-      const userRes = await db.collection('users').where({ openid: app.globalData.openid }).get();
-      if (userRes.data.length > 0) {
-        await db.collection('users').doc(userRes.data[0]._id).update({
-          data: {
-            avatarUrl: finalAvatarUrl,
-            nickName: nickName.trim()
-          }
-        });
-      }
+      // 使用云函数更新 users 表（绕过客户端无 _openid 导致的权限问题）
+      await wx.cloud.callFunction({
+        name: 'login',
+        data: {
+          action: 'updateProfile',
+          avatarUrl: finalAvatarUrl,
+          nickName: nickName.trim()
+        }
+      });
 
       // 更新全局状态
       app.globalData.userInfo = {
