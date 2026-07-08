@@ -1,7 +1,7 @@
 <!--pages/onboarding/onboarding.wxml-->
 <view class="container">
   <!-- 顶部厨房实景背景 -->
-  <image class="bg-image" src="/images/bg-kitchen-top.png" mode="aspectFill"></image>
+  <image class="bg-image" src="/images/bg-kitchen-top.jpg" mode="aspectFill"></image>
   <!-- 渐变遮罩层，让底部变为浅色 -->
   <view class="bg-overlay"></view>
 

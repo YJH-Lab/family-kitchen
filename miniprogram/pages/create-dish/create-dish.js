@@ -16,13 +16,61 @@ Page({
     wx.chooseMedia({
       count: 1,
       mediaType: ['image'],
+      sizeType: ['compressed'],
       sourceType: ['album', 'camera'],
-      success: (res) => {
+      success: async (res) => {
+        let tempFilePath = res.tempFiles[0].tempFilePath;
+        let size = res.tempFiles[0].size;
+        
+        if (size > 50 * 1024) {
+          wx.showLoading({ title: '图片压缩中...', mask: true });
+          tempFilePath = await this.compressImageToLimit(tempFilePath, 50 * 1024);
+          wx.hideLoading();
+        }
+
         this.setData({
-          imagePath: res.tempFiles[0].tempFilePath
+          imagePath: tempFilePath
         });
       }
     });
+  },
+
+  compressImageToLimit: async function (originalPath, limitSize) {
+    let currentPath = originalPath;
+    let quality = 80; // 从 80 质量开始尝试
+    
+    while (quality > 5) {
+      try {
+        const compressRes = await new Promise((resolve, reject) => {
+          wx.compressImage({
+            src: originalPath, // 始终用原图压缩，避免重复压缩产生严重噪点
+            quality: quality,
+            success: resolve,
+            fail: reject
+          });
+        });
+        
+        currentPath = compressRes.tempFilePath;
+        
+        const fileInfo = await new Promise((resolve, reject) => {
+          wx.getFileInfo({
+            filePath: currentPath,
+            success: resolve,
+            fail: reject
+          });
+        });
+        
+        if (fileInfo.size <= limitSize) {
+          break; // 满足要求则退出循环
+        }
+        
+        quality -= 15; // 如果还是太大，降低质量继续尝试
+      } catch (e) {
+        console.error('压缩过程异常：', e);
+        break;
+      }
+    }
+    return currentPath;
   },
 
   onCategoryChange: function (e) {

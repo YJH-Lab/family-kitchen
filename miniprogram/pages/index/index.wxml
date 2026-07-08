@@ -51,7 +51,7 @@
     <!-- Banner 推荐卡片 -->
     <view class="banner-card" bindtap="scrollToRecommend">
       <!-- 厨房背景图 -->
-      <image class="banner-bg" src="/images/bg-kitchen-top.png" mode="aspectFill"></image>
+      <image class="banner-bg" src="/images/bg-kitchen-top.jpg" mode="aspectFill"></image>
       <!-- 左侧绿色渐变蒙版，向右逐渐变透明 -->
       <view class="banner-overlay"></view>
       
