@@ -1,38 +1,70 @@
 <!--pages/onboarding/onboarding.wxml-->
 <view class="container">
-  <image class="bg-image" src="/images/bg-onboarding.png" mode="aspectFill"></image>
+  <!-- 顶部厨房实景背景 -->
+  <image class="bg-image" src="/images/bg-kitchen-top.png" mode="aspectFill"></image>
+  <!-- 渐变遮罩层，让底部变为浅色 -->
   <view class="bg-overlay"></view>
 
   <view class="content">
     <view class="top-bar">
       <image class="home-icon" src="/images/ui-family.png" mode="aspectFit"></image>
-      <text class="top-title">家庭点餐</text>
       <view class="capsule-placeholder"></view>
     </view>
 
+    <!-- Logo 区 -->
     <view class="center-brand">
-      <image class="brand-logo" src="/images/ui-badge.png" mode="aspectFit"></image>
+      <image class="brand-logo" src="/images/logo-circles.png" mode="aspectFit"></image>
       <text class="brand-title">家庭点餐</text>
-      <text class="brand-subtitle">记录每一顿家的味道</text>
+      <view class="subtitle-wrapper">
+        <text class="brand-subtitle">记录每一顿家的味道</text>
+        <view class="subtitle-underline"></view>
+      </view>
     </view>
 
     <view class="actions">
+      <!-- 创建家庭卡片 -->
       <view class="action-card create-card" bindtap="createFamily">
-        <view class="emoji-left">🥬🥕</view>
+        <image class="card-float-img float-salad" src="/images/img-salad.png" mode="aspectFit"></image>
+        <view class="card-watermark chef-watermark"><text>🧑‍🍳</text></view>
+        
         <view class="card-text">
           <text class="action-title">创建我的家庭厨房</text>
           <text class="action-desc">我是大厨，创建菜单并邀请家人</text>
         </view>
-        <view class="emoji-right">🧑‍🍳</view>
+        <view class="arrow-circle green-arrow">
+          <text>›</text>
+        </view>
       </view>
       
+      <!-- 加入家庭卡片 -->
       <view class="action-card join-card" bindtap="showJoinModal">
-        <view class="emoji-left" style="font-size:64rpx">👋</view>
-        <view class="card-text" style="margin-left: 20rpx;">
+        <image class="card-float-img float-sticky" src="/images/img-sticky.png" mode="aspectFit"></image>
+        
+        <view class="card-text">
           <text class="action-title join-title">加入现有家庭</text>
           <text class="action-desc join-desc">输入家人分享的加入码</text>
         </view>
-        <text class="arrow-icon">›</text>
+        <view class="arrow-circle light-green-arrow">
+          <text>›</text>
+        </view>
+      </view>
+    </view>
+    
+    <!-- 底部保障栏 -->
+    <view class="footer">
+      <view class="footer-item">
+        <text class="footer-icon">🛡️</text>
+        <text class="footer-text">安全私密</text>
+      </view>
+      <text class="footer-divider">|</text>
+      <view class="footer-item">
+        <text class="footer-icon">👨‍👩‍👧</text>
+        <text class="footer-text">家人共享</text>
+      </view>
+      <text class="footer-divider">|</text>
+      <view class="footer-item">
+        <text class="footer-icon">🍲</text>
+        <text class="footer-text">美味共创</text>
       </view>
     </view>
   </view>
