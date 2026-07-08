@@ -13,7 +13,7 @@
     <view class="member-list">
       <block wx:for="{{members}}" wx:key="_id">
         <view class="member-item">
-          <image class="avatar" src="{{item.avatarUrl || '/images/ui-avatar.png'}}"></image>
+          <image class="avatar" src="{{item.displayAvatar}}"></image>
           <view class="member-info">
             <text class="nickname">{{item.nickName || '用户 (' + item.shortId + ')'}}</text>
             <text class="role" wx:if="{{item.openid === family.creator}}">创建者</text>

@@ -1,43 +1,110 @@
 <!--pages/index/index.wxml-->
-<view class="container">
-  <!-- 顶部搜索框 -->
-  <view class="search-container">
-    <view class="search-box">
-      <icon type="search" size="16" color="#b7b7b7"></icon>
-      <input class="search-input" placeholder="搜索" placeholder-style="color:#b7b7b7;" bindinput="onSearchInput" bindconfirm="onSearch" value="{{searchText}}" />
+<view class="page-container">
+  <!-- 自定义导航栏 -->
+  <view class="custom-nav" style="padding-top: {{statusBarHeight}}px;">
+    <view class="nav-content">
+      <view class="greeting-area">
+        <view class="greeting-title">Hi，今天想吃点什么？👋</view>
+        <view class="greeting-subtitle">家庭厨房 · 用心做好每一餐</view>
+      </view>
+      <view class="nav-right">
+        <view class="notification-btn">
+          <text class="bell-icon">🔔</text>
+          <view class="notification-dot"></view>
+        </view>
+      </view>
     </view>
   </view>
 
-  <!-- 导航栏 -->
-  <view class="nav-bar">
-    <block wx:for="{{categories}}" wx:key="*this">
-      <view class="nav-item {{currentCategory === item ? 'active' : ''}}" bindtap="switchCategory" data-category="{{item}}">
-        <text>{{item}}</text>
-        <view class="indicator" wx:if="{{currentCategory === item}}"></view>
-      </view>
-    </block>
-  </view>
+  <!-- 导航栏占位 -->
+  <view class="nav-placeholder" style="height: {{navBarHeight}}px;"></view>
 
-  <!-- 列表区 -->
-  <view class="dish-list">
-    <block wx:for="{{dishes}}" wx:key="_id">
-      <view class="dish-card" bindtap="goToDetail" data-id="{{item._id}}">
-        <image class="dish-image" src="{{item.displayImage}}" mode="aspectFill"></image>
-        <view class="dish-info">
-          <text class="dish-name">{{item.name}}</text>
-          <text class="dish-desc">{{item.desc}}</text>
-          <view class="dish-bottom">
-            <text class="dish-price">¥{{item.price}}</text>
-            <view class="add-btn" catchtap="addToCart" data-item="{{item}}">
-              <text class="add-icon">+</text>
+  <!-- 可滚动内容区域 -->
+  <scroll-view class="scroll-content" scroll-y="true" enhanced="true" show-scrollbar="false" enable-passive="true">
+
+    <!-- 搜索栏 -->
+    <view class="search-section">
+      <view class="search-bar">
+        <text class="search-icon-text">🔍</text>
+        <input class="search-input" placeholder="搜索菜品、食材或口味" placeholder-style="color:#B5B5B5;" bindinput="onSearchInput" bindconfirm="onSearch" value="{{searchText}}" />
+        <view class="search-btn" bindtap="onSearch">搜索</view>
+      </view>
+    </view>
+
+    <!-- 分类导航 -->
+    <scroll-view class="category-scroll" scroll-x="true" enhanced="true" show-scrollbar="false" enable-passive="true">
+      <view class="category-list">
+        <block wx:for="{{categoryList}}" wx:key="name">
+          <view class="category-item {{currentCategory === item.name ? 'active' : ''}}" bindtap="switchCategory" data-category="{{item.name}}">
+            <view class="category-icon-wrapper">
+              <image class="category-icon-img" src="{{item.previewImage}}" mode="aspectFill"></image>
+              <view wx:if="{{currentCategory === item.name}}" class="category-badge">
+                <text class="badge-star">⭐</text>
+              </view>
             </view>
+            <text class="category-label">{{item.name}}</text>
+          </view>
+        </block>
+      </view>
+    </scroll-view>
+
+    <!-- Banner 推荐卡片 -->
+    <view class="banner-card" bindtap="scrollToRecommend">
+      <!-- 厨房背景图 -->
+      <image class="banner-bg" src="/images/bg-kitchen-top.png" mode="aspectFill"></image>
+      <!-- 左侧绿色渐变蒙版，向右逐渐变透明 -->
+      <view class="banner-overlay"></view>
+      
+      <!-- 内容层：分为左右两列 -->
+      <view class="banner-content">
+        <!-- 左侧文字区 -->
+        <view class="banner-left">
+          <image class="banner-chef-hat" src="/images/icon-chef-hat.svg" mode="aspectFit"></image>
+          <view class="banner-title">家的味道</view>
+          <view class="banner-subtitle">新鲜食材 · 每日现做</view>
+          <view class="banner-btn">查看今日推荐 →</view>
+        </view>
+        <!-- 右侧寄语 -->
+        <view class="banner-right">
+          <view class="daily-quote">
+            <text class="quote-mark">“</text>
+            <text class="quote-content">把爱藏在\n一蔬一饭里</text>
           </view>
         </view>
       </view>
-    </block>
-
-    <view class="empty-tip" wx:if="{{dishes.length === 0}}">
-      暂无菜品数据
     </view>
-  </view>
+
+    <!-- 菜品双列网格 -->
+    <view class="dish-grid">
+      <block wx:for="{{dishes}}" wx:key="_id">
+        <view class="dish-card" bindtap="goToDetail" data-id="{{item._id}}">
+          <view class="dish-img-wrapper">
+            <image class="dish-image" src="{{item.displayImage}}" mode="aspectFill"></image>
+            <view class="dish-tag {{item.tagClass}}" wx:if="{{item.tag}}">{{item.tag}}</view>
+          </view>
+          <view class="dish-info">
+            <text class="dish-name">{{item.name}}</text>
+            <text class="dish-desc">{{item.desc}}</text>
+            <view class="dish-bottom">
+              <view class="dish-price">
+                <text class="price-symbol">¥</text>
+                <text class="price-value">{{item.price}}</text>
+              </view>
+              <view class="add-cart-btn" catchtap="addToCart" data-item="{{item}}">
+                <text class="add-icon">+</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </block>
+
+      <view class="empty-tip" wx:if="{{dishes.length === 0 && !loading}}">
+        <image class="empty-img" src="/images/default-goods-image.png" mode="aspectFit"></image>
+        <text class="empty-text">暂无菜品数据</text>
+      </view>
+    </view>
+
+    <!-- 底部安全区占位 -->
+    <view class="bottom-safe-area"></view>
+  </scroll-view>
 </view>
