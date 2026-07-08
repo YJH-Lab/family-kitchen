@@ -1,12 +1,21 @@
 <!--pages/user/user.wxml-->
 <view class="container">
   <!-- 顶部用户信息 -->
-  <view class="user-header" bindtap="goToProfile">
-    <image class="avatar" src="{{userInfo.avatarUrl || '/images/ui-avatar.png'}}" mode="aspectFill"></image>
-    <view class="user-info">
-      <text class="user-name">{{userInfo.nickName || '点击设置个人资料'}}</text>
+  <view class="user-header">
+    <view class="avatar-container" bindtap="goToProfile">
+      <image class="avatar" src="{{userInfo.avatarUrl || '/images/ui-avatar.png'}}" mode="aspectFill"></image>
     </view>
-    <text class="menu-arrow header-arrow">›</text>
+    <view class="user-info" bindtap="goToProfile">
+      <view class="name-row">
+        <text class="user-name">{{userInfo.nickName || 'Jeff'}}</text>
+        <view class="family-tag">
+          <image class="tag-icon" src="/images/ui-family.png" mode="aspectFit"></image>
+          <text class="tag-text">家庭成员</text>
+        </view>
+      </view>
+      <text class="user-subtitle">用心做好每一餐 · 享受家的味道 🌿</text>
+    </view>
+    <text class="menu-arrow header-arrow" bindtap="goToProfile">›</text>
   </view>
 
   <!-- 订单状态区 -->
@@ -16,26 +25,43 @@
         <image class="title-icon" src="/images/ui-order.png" mode="aspectFit"></image>
         <text class="card-title">我的订单</text>
       </view>
-      <text class="menu-arrow">›</text>
+      <view class="title-right">
+        <text class="view-all-text">查看全部</text>
+        <text class="menu-arrow view-all-arrow">›</text>
+      </view>
     </view>
     <view class="status-row">
       <block wx:for="{{orderStatusList}}" wx:key="title">
         <view class="status-item" bindtap="openMenu" data-url="{{item.url}}">
-          <image class="status-icon" src="{{item.icon}}" mode="aspectFit"></image>
+          <view class="icon-wrapper {{item.bgClass}}">
+            <image class="status-icon" src="{{item.icon}}" mode="aspectFit"></image>
+            <view wx:if="{{item.badge}}" class="status-badge {{item.badgeClass}}">{{item.badge}}</view>
+          </view>
           <text class="status-text">{{item.title}}</text>
         </view>
       </block>
     </view>
   </view>
 
-  <!-- 菜单列表区 -->
-  <view class="menu-list-card">
-    <block wx:for="{{menuList}}" wx:key="title">
-      <view class="menu-item {{item.groupStart ? 'group-start' : ''}} {{item.groupEnd ? 'group-end' : ''}}" bindtap="openMenu" data-url="{{item.url}}">
-        <image class="menu-icon" src="{{item.icon}}" mode="aspectFit"></image>
-        <text class="menu-title">{{item.title}}</text>
-        <text class="menu-arrow">›</text>
-      </view>
-    </block>
+  <!-- 菜单列表区 (双分离卡片) -->
+  <block wx:for="{{menuGroups}}" wx:key="index" wx:for-item="group">
+    <view class="menu-list-card">
+      <block wx:for="{{group}}" wx:key="title">
+        <view class="menu-item" bindtap="openMenu" data-url="{{item.url}}">
+          <image class="menu-icon" src="{{item.icon}}" mode="aspectFit"></image>
+          <text class="menu-title">{{item.title}}</text>
+          <view class="menu-right">
+            <text class="menu-extra" wx:if="{{item.extraText}}">{{item.extraText}}</text>
+            <text class="menu-arrow">›</text>
+          </view>
+        </view>
+      </block>
+    </view>
+  </block>
+
+  <!-- 底部温馨插图 -->
+  <view class="bottom-illustration">
+    <image class="illustration-img" src="/images/img-bottom-pot.png" mode="aspectFit"></image>
+    <text class="illustration-text">用心做好每一餐，家更有味道✨</text>
   </view>
 </view>
